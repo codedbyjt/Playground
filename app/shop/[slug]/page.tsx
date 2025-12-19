@@ -2,13 +2,13 @@ import { supabase } from "@/lib/supabase";
 import { notFound } from "next/navigation";
 
 type PageProps = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 export default async function ProductPage({ params }: PageProps) {
-  const { slug } = params;
+  const { slug } = await params;
 
   const { data: product, error } = await supabase
     .from("products")
